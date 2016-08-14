@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -29,5 +30,7 @@ namespace ASP.NET_ToDo_App.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ASP.NET_ToDo_App.Models.Project> Projects { get; set; }
     }
 }
