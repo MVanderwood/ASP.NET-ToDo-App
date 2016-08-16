@@ -14,13 +14,7 @@ namespace ASP.NET_ToDo_App.Models.Tests
         [Test()]
         public void CompletedTasksTest()
         {
-            List<TDTask> test_tasks = new List<TDTask>
-            {
-                new TDTask(priority: 3, description: "complete task", completed: true),
-                new TDTask(priority: 3, description: "also complete", completed: true),
-                new TDTask(priority: 3, description: "incomplete task", completed: false)
-            };
-            Project project = new Project(tasks: test_tasks);
+            Project project = LoadProject();
             // Returns list of completed tasks
             Assert.AreEqual(project.CompletedTasks().Count, 2);
         }
@@ -28,31 +22,19 @@ namespace ASP.NET_ToDo_App.Models.Tests
         [Test()]
         public void IncompleteTasksTest()
         {
-            List<TDTask> test_tasks = new List<TDTask>
-            {
-                new TDTask(priority: 3, description: "complete task", completed: true),
-                new TDTask(priority: 3, description: "also complete", completed: true),
-                new TDTask(priority: 3, description: "incomplete task", completed: false)
-            };
-            Project project = new Project(tasks: test_tasks);
+            Project project = LoadProject();
             // Returns list of completed tasks
-            Assert.AreEqual(project.CompletedTasks().Count, 2);
+            Assert.AreEqual(project.CompletedTasks().Count, 1);
         }
 
         [Test()]
         public void GetTasksByPriority()
         {
-            List<TDTask> test_tasks = new List<TDTask>
-            {
-                new TDTask(priority: 1, description: "highest priority task", completed: true),
-                new TDTask(priority: 3, description: "high priority task", completed: true),
-                new TDTask(priority: 7, description: "low priority task", completed: false)
-            };
-            Project project = new Project(tasks: test_tasks);
+            Project project = LoadProject();
             // Returns list of tasks, ordered by priority
-            Assert.AreEqual(project.GetTasksByPriority()[0].Description, "highest priority task");
-            Assert.AreEqual(project.GetTasksByPriority()[1].Description, "high priority task");
-            Assert.AreEqual(project.GetTasksByPriority()[2].Description, "low priority task");
+            Assert.AreEqual(project.GetTasksByPriority()[0].Priority, 1);
+            Assert.AreEqual(project.GetTasksByPriority()[1].Priority, 3);
+            Assert.AreEqual(project.GetTasksByPriority()[2].Priority, 4);
         }
 
         [Test()]
@@ -71,15 +53,33 @@ namespace ASP.NET_ToDo_App.Models.Tests
             Assert.AreEqual(project.Tasks[2].Description, "new task");
         }
 
-        private Project LoadProject()
+        private Project LoadProject(string description = "Some project", bool tasksComplete = false, bool variedTaskPriority = true)
         {
-
+            return new Project
+            (
+                description: description, 
+                tasks: LoadTasks(tasksComplete, variedTaskPriority)
+            );
         }
 
-        private List<TDTask> LoadTasks()
+        private List<TDTask> LoadTasks(bool allComplete = false, bool variedPriority = true)
         {
-
+            List<TDTask> tasks = new List<TDTask>
+            {
+                new TDTask(description: "Some task.", priority: 1),
+                new TDTask(description: "Some other task.", priority: 3),
+                new TDTask(description: "Completed task.", priority: 4, completed: true)
+            };
+            if (allComplete)
+            {
+                tasks[0].Completed = true;
+                tasks[1].Completed = true;
+            }
+            if (!variedPriority)
+            {
+                foreach(TDTask task in tasks) { task.Priority = 3; }
+            }
+            return tasks;
         }
-        
     }
 }
