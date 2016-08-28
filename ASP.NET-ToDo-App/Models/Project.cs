@@ -21,11 +21,6 @@ namespace ASP.NET_ToDo_App.Models
             return Tasks.OrderBy(o => o.Priority).ToList();
         }
 
-        public void AddTask(TDTask Task)
-        {
-            Tasks.Add(Task);
-        }
-
         public List<TDTask> CompletedTasks()
         {
             List<TDTask> CompletedTasks = new List<TDTask>();
@@ -39,7 +34,7 @@ namespace ASP.NET_ToDo_App.Models
             return CompletedTasks;
         }
 
-        public List<TDTask> IncompleteTasks()
+        public List<TDTask> IncompletedTasks()
         {
             List<TDTask> IncompleteTasks = new List<TDTask>();
             for (int i = 0; i < Tasks.Count; i++)
