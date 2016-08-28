@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ASP.NET_ToDo_App.Models.Project>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Model.Count()
+
+@foreach (var project in Model)
+{
+    <h3>@project.Description</h3>
+}
