@@ -52,7 +52,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Models\ProjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +62,9 @@
       <Project>{380812D7-12B1-4545-B7D5-B1C980E42027}</Project>
       <Name>ASP.NET-ToDo-App</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

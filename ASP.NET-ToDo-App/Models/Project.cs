@@ -16,12 +16,6 @@ namespace ASP.NET_ToDo_App.Models
 
         public virtual List<TDTask> Tasks { get; set; }
 
-        public Project(string description = "", List<TDTask> tasks = null)
-        {
-            this.Description = description;
-            this.Tasks = tasks ?? new List<TDTask>();
-        }
-
         public List<TDTask> GetTasksByPriority()
         {
             return Tasks.OrderBy(o => o.Priority).ToList();

@@ -25,11 +25,5 @@ namespace ASP.NET_ToDo_App.Models
 
         public virtual Project Project { get; set; }
 
-        public TDTask(int priority, string description = "", bool completed = false)
-        {
-            this.Priority = priority;
-            this.Description = description;
-            this.Completed = completed;
-        }
     }
 }

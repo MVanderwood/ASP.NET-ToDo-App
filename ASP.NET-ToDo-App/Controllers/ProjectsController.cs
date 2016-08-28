@@ -12,9 +12,13 @@ namespace ASP.NET_ToDo_App.Controllers
     [RoutePrefix("projects")]
     public class ProjectsController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        [Route("")]
         public ActionResult Index()
         {
-            return View();
+            List<Project> projects = db.Projects.ToList();
+            return View(db.Projects.ToList());
         }
     }
 }
