@@ -18,7 +18,7 @@ namespace ASP.NET_ToDo_App.Controllers
         public ActionResult Index()
         {
             List<Project> projects = db.Projects.ToList();
-            return View(db.Projects.ToList());
+            return View(projects);
         }
     }
 }
