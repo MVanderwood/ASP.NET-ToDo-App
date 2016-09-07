@@ -20,5 +20,13 @@ namespace ASP.NET_ToDo_App.Controllers
             List<Project> projects = db.Projects.ToList();
             return View(projects);
         }
+
+        [Route("{id:int}")]
+        public ActionResult Show(int id)
+        {
+            Project project = db.Projects.Find(id);
+            if (project == null) return HttpNotFound();
+            return View(project);
+        }
     }
 }
