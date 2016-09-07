@@ -28,5 +28,29 @@ namespace ASP.NET_ToDo_App.Controllers
             if (project == null) return HttpNotFound();
             return View(project);
         }
+
+        [Route("new")]
+        public ActionResult New()
+        {
+            Project project = new Project();
+            return View(project);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public ActionResult Create(Project newProject)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Projects.Add(newProject);
+                db.SaveChanges();
+                //return RedirectToAction("Show", newProject.ProjectID);
+                return Show(newProject.ProjectID);
+            }
+            else
+            {
+                return View(newProject);
+            }
+        }
     }
 }
