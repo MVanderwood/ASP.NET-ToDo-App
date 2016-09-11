@@ -44,8 +44,7 @@ namespace ASP.NET_ToDo_App.Controllers
             {
                 db.Projects.Add(newProject);
                 db.SaveChanges();
-                //return RedirectToAction("Show", newProject.ProjectID);
-                return Show(newProject.ProjectID);
+                return RedirectToAction("Show", new { id = newProject.ProjectID});
             }
             else
             {
